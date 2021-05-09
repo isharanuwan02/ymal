@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: repo-service
+  namespace: sliit-aecs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app_name: repo-service
+  template:
+    metadata:
+      labels:
+        app_name: repo-service
+    spec:
+      containers:
+      - image: isharanuwan02/repo-service:v1
+        imagePullPolicy: Always
+        name: repo-service
+        ports:
+        - containerPort: 8000
+          name: port-8000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+      imagePullSecrets:
+      - name: ishara-docker-hub
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+

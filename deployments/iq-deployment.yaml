@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iq-service
+  namespace: sliit-aecs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app_name: iq-service
+  template:
+    metadata:
+      labels:
+        app_name: i1-service
+    spec:
+      containers:
+      - image: isharanuwan02/iq-service:v1
+        imagePullPolicy: Always
+        name: iq-service
+        ports:
+        - containerPort: 8000
+          name: port-8000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+      imagePullSecrets:
+      - name: ishara-docker-hub
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+

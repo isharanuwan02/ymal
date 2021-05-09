@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: sliit-aecs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app_name: auth-service
+  template:
+    spec:
+      containers:
+      - image: isharanuwan02/auth-service:v1
+        imagePullPolicy: Always
+        name: auth-service
+        ports:
+        - containerPort: 8000
+          name: port-8000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+      imagePullSecrets:
+      - name: ishara-docker-hub
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
