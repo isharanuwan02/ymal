@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 2
+  name: iq-service
+  namespace: t3
+spec:
+  rules:
+  - host: iq.ishara.com
+    http:
+      paths:
+      - backend:
+          serviceName: iq-service
+          servicePort: 8000
+        path: /
+  tls:
+  - hosts:
+    - iq.ishara.com
+    secretName: iq-service
+status:
+  loadBalancer:
+    ingress:
+    - ip: 0.0.0.0 

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 2
+  name: repo-service
+  namespace: t3
+spec:
+  rules:
+  - host: repo.ishara.com
+    http:
+      paths:
+      - backend:
+          serviceName: repo-service
+          servicePort: 8000
+        path: /
+  tls:
+  - hosts:
+    - repo.ishara.com
+    secretName: repo-service
+status:
+  loadBalancer:
+    ingress:
+    - ip: 0.0.0.0 

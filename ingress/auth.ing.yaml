@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  generation: 2
+  name: auth-service
+  namespace: t3
+spec:
+  rules:
+  - host: auth.ishara.com
+    http:
+      paths:
+      - backend:
+          serviceName: auth-service
+          servicePort: 8000
+        path: /
+  tls:
+  - hosts:
+    - auth.ishara.com
+    secretName: auth-service
+status:
+  loadBalancer:
+    ingress:
+    - ip: 0.0.0.0 
