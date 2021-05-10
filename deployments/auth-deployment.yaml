@@ -9,6 +9,9 @@ spec:
     matchLabels:
       app_name: auth-service
   template:
+    metadata:
+      labels:
+        app_name: auth-service
     spec:
       containers:
       - image: isharanuwan02/auth-service:v1
